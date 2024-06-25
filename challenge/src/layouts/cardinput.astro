@@ -1,0 +1,115 @@
+<div class="container">
+    <div class="cardinput">
+        <input id="textoInput" class="texto" type="text" placeholder="Ingrese el texto aquí">
+        <span>
+            <svg fill="#000000" width="16px" height="16px" viewBox="0 0 24 24" id="exclamation" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path id="secondary" d="M13,13H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1v8A1,1,0,0,1,13,13Zm1,6a2,2,0,1,0-2,2A2,2,0,0,0,14,19Z" style="fill: #2ca9bc; stroke-width: 2;"></path>
+                    <path id="primary" d="M13,13H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1v8A1,1,0,0,1,13,13Zm1,6a2,2,0,1,0-2,2A2,2,0,0,0,14,19Z" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path>
+                </g>
+            </svg>
+                Recuerda guardar el texto resultante una vez lo encriptes
+        </span>
+        <div class="button-container">
+            <button id="encriptarBtn" class="buttonencript">Encriptar!</button>
+            <button id="desencriptarBtn" class="buttonunencript">Desencriptar!</button>
+        </div>
+    </div>
+    <div class="cardoutput" id="outputCard">
+        <img id="outputImage" src="/assets/badGateway.png" alt="Ningún mensaje fue encontrado">
+        <p id="outputText">Ningún mensaje fue encontrado</p>
+        <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+        <button id="copiarBtn" class="buttonunencript" style="display: none;">Copiar</button>
+    </div>
+</div>
+
+<script>
+import Swal from 'sweetalert2';
+import CryptoJS from 'crypto-js';
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const textoInput = document.querySelector('#textoInput') as HTMLInputElement;
+    const encriptarBtn = document.querySelector('#encriptarBtn') as HTMLButtonElement;
+    const desencriptarBtn = document.querySelector('#desencriptarBtn') as HTMLButtonElement;
+    const outputText = document.querySelector('#outputText')as HTMLParagraphElement;
+    const copiarBtn = document.querySelector('#copiarBtn') as HTMLButtonElement;
+    const outputImage = document.querySelector('#outputImage') as HTMLImageElement;
+
+    const key = '@dm424_-e<rt3%$=82';  
+
+    encriptarBtn.addEventListener('click', () => {
+        const texto = textoInput.value;
+        if (texto) {
+            const textoEncriptado = CryptoJS.AES.encrypt(texto, key).toString();
+            outputText.innerText = textoEncriptado;
+            outputImage.style.display = 'none';
+            copiarBtn.style.display = 'block';
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Primero ingrese texto para encriptar',
+            });
+            outputImage.style.display = 'block';
+            outputText.innerText = 'No message found';
+            copiarBtn.style.display = 'none';
+        }
+    });
+
+    desencriptarBtn.addEventListener('click', () => {
+        const textoEncriptado = textoInput.value;
+        if (textoEncriptado) {
+            try {
+                const bytes = CryptoJS.AES.decrypt(textoEncriptado, key);
+                const textoDesencriptado = bytes.toString(CryptoJS.enc.Utf8);
+                if (textoDesencriptado) {
+                    outputText.innerText = textoDesencriptado;
+                    outputImage.style.display = 'none';
+                    copiarBtn.style.display = 'block';
+                } else {
+                    throw new Error('Invalid decryption');
+                }
+            } catch (e) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se reconoce el texto encriptado',
+                });
+                outputImage.style.display = 'block';
+                outputText.innerText = 'No message found';
+                copiarBtn.style.display = 'none';
+            }
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Ingresa texto encriptado porfavor',
+            });
+            outputImage.style.display = 'block';
+            outputText.innerText = 'No message found';
+            copiarBtn.style.display = 'none';
+        }
+    });
+
+    copiarBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(outputText.innerText).then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Exito',
+                text: 'Copiado en tu portapapeles',
+            });
+        }).catch(err => {
+            console.error('Error copying text: ', err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al copiar el texto',
+            });
+        });
+    });
+});
+
+</script>

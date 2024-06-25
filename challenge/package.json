@@ -1,0 +1,17 @@
+{
+  "name": "challenge",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.11.1",
+    "crypto-js": "^4.2.0",
+    "sweetalert2": "^11.12.0"
+  }
+}
