@@ -27,22 +27,22 @@ This repository is a combination of all projects that I have done during my stud
 <table align="center">
 
 <tr>
-  <td width="25%" align="center">
-    <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/challenge">
-      <img src="./media/projects/TextEncripter.png" alt="Text Encripter" width="100%">
-    </a>
-    <a href="https://oracle-one-education-kw1a8lxm0-angels-projects-69ebfab1.vercel.app/">
-      <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-      <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
-    </a>
-  </td>
 
 <td width="25%" align="center">
   <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/logic">
     <img src="./media/projects/Logic.png" alt="Logic Project" width="100%">
   </a>
-  <a href="https://oracle-one-education-game-adivination.vercel.app/logic">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  <a href="https://oracle-one-education-game-adivination.vercel.app/">
+    <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
+  </a>
+</td>
+
+
+<td width="25%" align="center">
+  <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/challenge">
+    <img src="./media/projects/TextEncripter.png" alt="Text Encripter" width="100%">
+  </a>
+  <a href="https://oracle-one-education-jh2uls6eu-angels-projects-69ebfab1.vercel.app/">
     <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
   </a>
 </td>
@@ -51,18 +51,17 @@ This repository is a combination of all projects that I have done during my stud
   <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/MoneyConversor">
     <img src="./media/projects/Conversor.png" alt="Money Conversor" width="100%">
   </a>
-  <a href="https://oracle-one-education-game-adivination.vercel.app/MoneyConversor">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-    <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
+  <a href="">
+    <img src="https://img.shields.io/badge/Not%20Deployed-FF0000?style=for-the-badge&logo=git&logoColor=white" alt="Not Deployed">
   </a>
 </td>
+
 
 <td width="25%" align="center">
   <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/alura">
     <img src="./media/projects/Forums.png" alt="Alura Forums" width="100%">
   </a>
   <a href="https://oracle-one-education-kw1a8lxm0-angels-projects-69ebfab1.vercel.app/alura">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
     <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
   </a>
 </td>
