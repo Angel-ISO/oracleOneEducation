@@ -1,0 +1,17 @@
+{
+    "projects": [
+      {
+        "src": "challenge",
+        "use": "@vercel/astro"
+      },
+      {
+        "src": "alura",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "logic",
+        "use": "@vercel/static"
+      }
+    ]
+  }
+  
