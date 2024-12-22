@@ -34,6 +34,11 @@ This repository is a combination of all projects that I have done during my stud
         <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/logic" target="_blank">
             <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
         </a>
+    </p>
+    <p align="center">
+        <a href="https://oracle-one-education-game-adivination.vercel.app/" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+        </a>
     </p>       
   </td>
 
@@ -44,6 +49,11 @@ This repository is a combination of all projects that I have done during my stud
     <p align="center">
         <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/challenge" target="_blank">
             <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+        </a>
+    </p>
+    <p align="center">
+        <a href="https://oracle-one-education-kw1a8lxm0-angels-projects-69ebfab1.vercel.app/" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
         </a>
     </p> 
   </td>
@@ -56,6 +66,11 @@ This repository is a combination of all projects that I have done during my stud
         <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/MoneyConversor" target="_blank">
             <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
         </a>
+    </p>
+    <p align="center">
+        <a href="https://oracle-one-education-game-adivination.vercel.app/MoneyConversor" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+        </a>
     </p>       
   </td>
 
@@ -66,6 +81,11 @@ This repository is a combination of all projects that I have done during my stud
     <p align="center">
         <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/alura" target="_blank">
             <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+        </a>
+    </p>
+    <p align="center">
+        <a href="https://oracle-one-education-kw1a8lxm0-angels-projects-69ebfab1.vercel.app/alura" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
         </a>
     </p>       
   </td>
