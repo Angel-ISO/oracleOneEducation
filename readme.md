@@ -24,62 +24,53 @@ This repository is a combination of all projects that I have done during my stud
 <br>
 <br>
 
-
-
-<div align="center">
-  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
-    
-<div style="border: 2px solid #00bcd4; padding: 10px; border-radius: 10px; text-align: center; background-color: #f0f8ff; width: 180px;">
-    <h3 style="color: #00796b; font-size: 16px;">Logic Project</h3>
-    <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/logic" target="_blank">
-      <img src="./media/projects/Logic.png" alt="Logic Project" style="width: 100%; border-radius: 5px;" />
-    </a>
-    <p>
-      <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/logic" target="_blank">
-        <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-      </a>
+<table align="left">
+<tr border="none">
+  <td width="25%" align="center">
+    <p align="center">
+        <img align="center" width=100% src="./media/projects/Logic.png" alt="Logic Project" />
     </p>
-</div>
+    <p align="center">
+        <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/logic" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+        </a>
+    </p>       
+  </td>
 
-  <div style="border: 2px solid #00bcd4; padding: 10px; border-radius: 10px; text-align: center; background-color: #f0f8ff; width: 180px;">
-    <h3 style="color: #00796b; font-size: 16px;">Text Encripter</h3>
-    <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/challenge" target="_blank">
-      <img src="./media/projects/TextEncripter.png" alt="Text Encripter" style="width: 100%; border-radius: 5px;" />
-    </a>
-    <p>
-      <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/challenge" target="_blank">
-        <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-      </a>
+  <td width="25%" align="center">
+    <p align="center">
+        <img align="center" width=100% src="./media/projects/TextEncripter.png" alt="Text Encripter" />
     </p>
-</div>
+    <p align="center">
+        <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/challenge" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+        </a>
+    </p> 
+  </td>
 
-<div style="border: 2px solid #00bcd4; padding: 10px; border-radius: 10px; text-align: center; background-color: #f0f8ff; width: 180px;">
-    <h3 style="color: #00796b; font-size: 16px;">Money Conversor</h3>
-    <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/MoneyConversor" target="_blank">
-      <img src="./media/projects/Conversor.png" alt="Money Conversor" style="width: 100%; border-radius: 5px;" />
-    </a>
-    <p>
-      <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/MoneyConversor" target="_blank">
-        <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-      </a>
+  <td width="25%" align="center">
+    <p align="center">
+        <img align="center" width=100% src="./media/projects/Conversor.png" alt="Money Conversor" />
     </p>
-</div>
+    <p align="center">
+        <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/MoneyConversor" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+        </a>
+    </p>       
+  </td>
 
-<div style="border: 2px solid #00bcd4; padding: 10px; border-radius: 10px; text-align: center; background-color: #f0f8ff; width: 180px;">
-    <h3 style="color: #00796b; font-size: 16px;">Alura Forums</h3>
-    <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/alura" target="_blank">
-      <img src="./media/projects/Forums.png" alt="Alura Forums" style="width: 100%; border-radius: 5px;" />
-    </a>
-    <p>
-      <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/alura" target="_blank">
-        <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-      </a>
+  <td width="25%" align="center">
+    <p align="center">
+        <img align="center" width=100% src="./media/projects/Forums.png" alt="Alura Forums" />
     </p>
-</div>
-
-  </div>
-</div>
-
+    <p align="center">
+        <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/alura" target="_blank">
+            <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+        </a>
+    </p>       
+  </td>
+</tr>
+</table>
 
 
 
