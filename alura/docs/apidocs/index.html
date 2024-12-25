@@ -3,10 +3,925 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>documentation</title>
+    <title>Forum API Documentation</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="js/search.js" defer></script>
+    <link rel="icon" href="../assets/AluraForumsL.png" type="image/x-icon" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defe></script>
 </head>
 <body>
-    <h1>documentation of my api</h1>
-    
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <img src="../assets/comment.png" alt="Logo" height="40">
+           Alura Forums API Docs
+        </a>
+        <div class="search-container">
+            <input type="search" class="search-input" placeholder="Search documentation...">
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <h3>Getting Started</h3>
+                <a href="#introduction">Introduction</a>
+                <a href="#authentication">Authentication</a>
+                
+                <h3>Endpoints</h3>
+                <a href="#users">Users</a>
+                <a href="#posts">Forums</a>
+                <a href="#comments">Comments</a>
+                
+                <h3>Bonus</h3>
+                <a href="#errors">Admin functionalities</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+          <h1>Getting Started</h1>
+
+            <section id="introduction">
+                <h1>Introduction</h1>
+                <br>
+                <p>Welcome to the Forum API documentation. Use the sidebar to navigate between different sections.
+                  This api was create to administrate the functionality of the real forum, where the users can create, read, update and delete the posts, comments and make threads in each forum.
+                  supporting any type of authentication, and the api is open to the public.
+                </p>
+            </section>
+
+            <section id="authentication">
+                <h1>Authentication</h1>
+                <p>The api is under a token based authentication, so you need to send a header with the token in every request. this means that you need to get a token, the expiration of the token is 30 minutes, and the token will expire after that time, you can get a new token by sending a pos request to the api on the following endpoint.</p>
+                
+<br>
+<br>
+              <p><span class="method post">POST</span> /api/auth/login</p>
+
+
+
+              <p>the server wait a body to answer the request with valid credentials, the body must be a json with the following structure:</p>
+
+
+              <div class="code-editor">
+                <div class="header">
+                  <span class="title">Json expected body</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                    <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                  </svg>
+                </div>
+                <div class="editor-content">
+                  <code class="code">
+                    <p><span>{</span></p>
+                    <p><span class="color-0">"username"</span>: <span class="color-1">"username_example"</span>,</p>
+                    <p><span class="color-0">"password"</span>: <span class="color-1">"password_example"</span></p>
+                    <p><span>}</span></p>
+                  </code>
+                </div>
+              </div>
+
+
+                <p>if your credentials are correct, the server will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json result body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>{</span></p>
+                     <p><span class="color-0">"username"</span>: <span class="color-1">"username_example"</span>,</p>
+                     <p><span class="color-0">"message"</span>: <span class="color-1">"user logged sucessfully"</span>,</p>
+                     <p><span class="color-0">"status"</span>: <span class="color-1">"true"</span></p>
+                     <p><span class="color-0">"jwt"</span>: <span class="color-1">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.
+                      SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"</span></p>
+                     <p><span>}</span></p>
+                    </code>
+                  </div>
+                </div>
+
+
+                <p>if your credentials are not correct, the server will return a json with the following structure:</p>
+
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json result body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+
+                      <p><span>{</span></p>
+                        <p><span class="color-0">"username"</span>: <span class="color-1">"null"</span>,</p>
+                        <p><span class="color-0">"message"</span>: <span class="color-1">"incorrect credentials"</span>,</p>
+                        <p><span class="color-0">"status"</span>: <span class="color-1">"null"</span></p>
+                        <p><span class="color-0">"jwt"</span>: <span class="color-1">"null"</span></p>
+                        <p><span>}</span></p>
+                    </code>
+                  </div>
+                </div>
+
+                <p> before u get a token u can use the api depending of your role and permissions, the roles are:</p>
+
+                <br>
+
+                <ul>
+                  <li data-description=" Full access to all features, including managing users and roles.">
+                      ADMIN
+                  </li>
+                  <li data-description=" Can create and modify technical aspects of the system.">
+                      DEVELOPER
+                  </li>
+                  <li data-description=" Has access to basic functionalities and personal settings.">
+                      USER
+                  </li>
+                  <li data-description="Similar to user but Limited access to view content but no modifications allowed.">
+                      INVITED
+                  </li>
+              </ul>
+               
+            </section>
+
+            <h1>Endpoints</h1>
+
+            <section id="users">
+
+                <h1>Users</h1>
+                <p>The uses endpoint is used to manage users in the system, it can be used to create, update, and delete users. dont forget to pass the token in the header of the request.</p>
+                
+                <br>
+              
+                <p><span class="method get">GET</span> /api/users</p>
+
+
+                <p>before u pass the token in the header and make the request to that endpoint, the server will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json result body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>{</span></p>
+                      <p><span class="color-0">"username"</span>: <span class="color-1">"john_doe_123"</span>,</p>
+                      <p><span class="color-0">"name"</span>: <span class="color-1">"John Doe"</span>,</p>
+                      <p><span class="color-0">"email"</span>: <span class="color-1">"john.doe@example.com"</span>,</p>
+                      <p><span class="color-0">"createdAt"</span>: <span class="color-1">"2024-01-01T12:00:00.000+00:00"</span>,</p>
+                      <p><span class="color-0">"isEnabled"</span>: <span class="color-1">true</span>,</p>
+                      <p><span class="color-0">"accountNoExpired"</span>: <span class="color-1">true</span>,</p>
+                      <p><span class="color-0">"accountNoLocked"</span>: <span class="color-1">false</span>,</p>
+                      <p><span class="color-0">"credentialNoExpired"</span>: <span class="color-1">true</span>,</p>
+                      <p><span class="color-0">"roles"</span>: <span class="color-1">[</span><span class="color-2">"ADMIN", "USER"</span><span class="color-1">]</span></p>
+                      <p><span>}</span></p>
+                
+                      <p><span>{</span></p>
+                      <p><span class="color-0">"username"</span>: <span class="color-1">"jane_smith_456"</span>,</p>
+                      <p><span class="color-0">"name"</span>: <span class="color-1">"Jane Smith"</span>,</p>
+                      <p><span class="color-0">"email"</span>: <span class="color-1">"jane.smith@example.com"</span>,</p>
+                      <p><span class="color-0">"createdAt"</span>: <span class="color-1">"2024-02-15T14:30:00.000+00:00"</span>,</p>
+                      <p><span class="color-0">"isEnabled"</span>: <span class="color-1">false</span>,</p>
+                      <p><span class="color-0">"accountNoExpired"</span>: <span class="color-1">false</span>,</p>
+                      <p><span class="color-0">"accountNoLocked"</span>: <span class="color-1">true</span>,</p>
+                      <p><span class="color-0">"credentialNoExpired"</span>: <span class="color-1">false</span>,</p>
+                      <p><span class="color-0">"roles"</span>: <span class="color-1">[</span><span class="color-2">"USER"</span><span class="color-1">]</span></p>
+                      <p><span>}</span></p>
+                
+            
+              
+                    </code>
+                  </div>
+                </div>
+
+                <p>now if u wanna register to the system u dont need to pass the bearer token in the header, just do the request to the following endpoint</p>
+                <br>
+                <p><span class="method post">POST</span> /api/auth/sign-up</p>
+                
+                <p>the server will request a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json expected body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>{</span></p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"username"</span>: <span class="color-1">"johndoe_123"</span>,</p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"password"</span>: <span class="color-1">"John@345"</span>, <span class="color-3">" // Password should have at least 1 uppercase letter, 1 special character, and 3 numbers </span></p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"name"</span>: <span class="color-1">"John Doe"</span>,</p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"email"</span>: <span class="color-1">"johndoe@example.com"</span>,</p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"roleRequest"</span>: <span class="color-4">{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"roleListName"</span>: <span class="color-1">[</span><span class="color-2">"INVITED"</span><span class="color-1">]</span></p>
+                      <p>&nbsp;&nbsp;<span class="color-4">}</span></p>
+                      <p><span>}</span></p>
+                    </code>
+                  </div>
+                </div>
+
+                <p> u can pass a role of user, but the admin and developer not be able in that moment only another admin or developer can add you that role. by default the role is user, but u can select role invited if u want</p>
+
+
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json expected body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>{</span></p>
+                      <p><span class="color-0">"username"</span>: <span class="color-1">"janedoe_456"</span>,</p>
+                      <p><span class="color-0">"password"</span>: <span class="color-1">"Jane@678"</span>,</p>
+                      <p><span class="color-0">"name"</span>: <span class="color-1">"Jane Doe"</span>,</p>
+                      <p><span class="color-0">"email"</span>: <span class="color-1">"janedoe@example.com"</span></p>
+                      <p><span>}</span></p>
+                    </code>
+                  </div>
+                </div>
+                
+
+                <p>if your credentials are correct, the server will return a json with the following structure:</p>
+                
+                
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json result body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>{</span></p>
+                     <p><span class="color-0">"username"</span>: <span class="color-1">"username_example"</span>,</p>
+                     <p><span class="color-0">"message"</span>: <span class="color-1">"User created successfully with default role USER."</span>,</p>
+                     <p><span class="color-0">"status"</span>: <span class="color-1">"true"</span></p>
+                     <p><span class="color-0">"jwt"</span>: <span class="color-1">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.
+                      SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"</span></p>
+                     <p><span>}</span></p>
+                    </code>
+                  </div>
+                </div>
+
+
+              <p> but if u use an username or email that already exists or if the password is not strong enough, the server will return a json with the following structure:</p>
+
+
+              <div class="code-editor">
+                <div class="header">
+                  <span class="title">Json result body</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                    <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                  </svg>
+                </div>
+                <div class="editor-content">
+                  <code class="code">
+                    <p><span>{</span></p>
+                   <p><span class="color-0">"username"</span>: <span class="color-1">"null"</span>,</p>
+                   <p><span class="color-0">"message"</span>: <span class="color-1">"User already exists."</span>, // email already exists - Password must contain at least one uppercase letter, two numbers, and one special character</p>
+                   <p><span class="color-0">"status"</span>: <span class="color-1">"null"</span></p>
+                   <p><span class="color-0">"jwt"</span>: <span class="color-1">"null"</span></p>
+                   <p><span>}</span></p>
+                  </code>
+                </div>
+              </div>
+
+              <br>
+              <p><span class="method put">PUT</span> /api/users/{id}/details</p>
+              <br>
+              <p>to update user, u can select a fill of your preference, bug the role are not editable, just for the admins and developers can add or remove it,if you try to change the fills of another user of the currently logged on the token the system gonna return a json with the following structure:</p>
+
+              <div class="code-editor">
+                <div class="header">
+                  <span class="title">Json result body</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                    <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                  </svg>
+                </div>
+                <div class="editor-content">
+                  <code class="code">
+                   <p><span class="color-0">You don't have permission to update this user: u dont have permission to update user details to other users</span></p>
+                  </code>
+                </div>
+              </div>
+
+              <p>but if u be admin, developer or the owner of the user logged on the token u can update the user details of the user, the server will return a json with the following structure:</p>
+
+              
+              <div class="code-editor">
+                <div class="header">
+                  <span class="title">Json result body</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                    <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                  </svg>
+                </div>
+                <div class="editor-content">
+                  <code class="code">
+                   <p><span class="color-0">User details updated successfully.</span></p>
+                  </code>
+                </div>
+              </div>
+
+              <br>
+              <p><span class="method delete">DELETE</span> /api/users/deleteAcc/{id}</p>
+              <br>
+              <p> under the same logic, the admins or developers can delete every user, but if you are a normal user and try to delete another user of the currently logged on the token the system gonna return a json with the following structure:</p>
+
+              <div class="code-editor">
+                <div class="header">
+                  <span class="title">Json result body</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                    <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                  </svg>
+                </div>
+                <div class="editor-content">
+                  <code class="code">
+                   <p><span class="color-0">You don't have permission to delete this user: U dont have permission to delete accounts to other users</span></p>
+                  </code>
+                </div>
+              </div>
+
+              <p>if u be admin or developer or the owner of the user logged on the token u can delete the user, the server will return a json with the following structure:</p>
+
+              <div class="code-editor">
+                <div class="header">
+                  <span class="title">Json result body</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                    <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                  </svg>
+                </div>
+                <div class="editor-content">
+                  <code class="code">
+                   <p><span class="color-0">User deleted successfully.</span></p>
+                  </code>
+                </div>
+              </div>
+
+              <p></p>
+                
+            </section>
+
+            <section id="posts">
+                <h1>Forums</h1>
+                <p>The forums on the system. have been created for the objetive to reach a system with a patterns of disscussion, and a system that can be used by the users to create a forum, and to manage the posts of the forum.</p>
+                <br>
+                <p>we have to options to list the forums, with replies or singles.</p>
+                <br>
+                <p><span class="method get">GET</span> /api/forums</p>
+                <br>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json result body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>[</span></p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"title"</span>: <span class="color-1">"Best coding practices in Java"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"description"</span>: <span class="color-1">"Share tips and tricks for writing clean Java code."</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-20T10:15:30.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"ownerId"</span>: <span class="color-1">"1"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"messages"</span>: <span>[</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"Always use meaningful variable names."</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"coder123"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-20T12:00:00.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span>[]</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"parentMessageId"</span>: <span class="color-1">null</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>}</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span>]</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span>,</p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"title"</span>: <span class="color-1">"What is your favorite IDE?"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"description"</span>: <span class="color-1">"Discuss the best IDEs for various programming languages."</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-20T15:45:10.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"ownerId"</span>: <span class="color-1">"2"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"messages"</span>: <span>[]</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span></p>
+                      <p><span>]</span></p>
+                    </code>
+                  </div>
+                </div>
+                
+
+                <p>if u want to get a single forum u can use the following endpoint</p>
+                <br>
+
+                <p><span class="method get">GET</span> /api/forums/single</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON Result Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>[</span></p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"title"</span>: <span class="color-1">"How to implement a REST API in Java?"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"description"</span>: <span class="color-1">"Looking for tips and resources to build a simple REST API using Spring Boot."</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-13 17:46:12.207"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"ownerId"</span>: <span class="color-1">"1"</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span>,</p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"title"</span>: <span class="color-1">"What is the difference between JPA and Hibernate?"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"description"</span>: <span class="color-1">"I often hear these terms used interchangeably. Are they the same thing?"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-13 17:46:12.207"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"ownerId"</span>: <span class="color-1">"2"</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span></p>
+                      <p><span>]</span></p>
+                    </code>
+                  </div>
+                </div>
+                <br>
+
+                <p>if u want to create a post is very simple, just use the following endpoint:</p>
+                <br>
+                <p><span class="method post">POST</span> /api/forums/create-forum</p>
+
+                <p>the server will request a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json expected body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>{</span></p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"title"</span>: <span class="color-1">"How to implement a REST API in Java?"</span>,</p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"description"</span>: <span class="color-1">"Looking for tips and resources to build a simple REST API using Spring Boot."</span>,</p>
+                      <p><span>}</span></p>
+                    </code>
+                  </div>
+                </div>
+
+                <p>after u pass the last json, the server will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json result body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span class="color-0">Forum created successfully.</span></p>
+                    </code>
+                  </div>
+                </div>
+
+
+
+                <p>if u want to update a forum u can use the following endpoint, but the system dont allow update the forums of another users(if u dont have role admin or developer) and the unique fills of the system leave modify are the title and description whatever u want.</p>
+                <br>
+                <p><span class="method put">PUT</span> /api/forums/update-forum/{id}</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON request Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>{</span></p>
+                      <p>&nbsp;&nbsp;<span class="color-0">"title"</span>: <span class="color-1">"How to implement a REST API in Java?"</span>,</p>
+                      <p><span>}</span></p>
+                    </code>
+                  </div>
+                </div>
+
+                <p>after u update one fill or both fields the system will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON Result Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span class="color-0">Forum updated successfully.</span></p>                      
+                    </code>
+                  </div>
+                </div>
+
+                <p>if u pass a bad id of the forum, and you dont be the owner of the forum who is currently loged on the token, the system will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON Result Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span class="color-0">You don't have permission to update this forum: U dont have permission to update forums to other users</span></p>
+                    </code>
+                  </div>
+                </div>
+
+                <p>if u want to delete a forum u just need to pass the id of the forum on the endpoint, but the system dont allow delete the forums of another users(if u dont have role admin or developer).</p>
+                <br>
+                <p><span class="method delete">DELETE</span> /api/messages/delete-message/{id}</p>
+
+                <p>after u pass the id of the forum, the server will return a json with the following structure:</p>
+
+                
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON Result Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span class="color-0">Forum deleted successfully.</span></p>                      
+                    </code>
+                  </div>
+                </div>
+
+
+
+                  <p>if u pass incorrect id the system will return a json with the following structure:</p>
+
+                  <div class="code-editor">
+                    <div class="header">
+                      <span class="title">JSON Result Body</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                        <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                      </svg>
+                    </div>
+                    <div class="editor-content">
+                      <code class="code">
+                        <p><span class="color-0">You don't have permission to delete this forum: U dont have permission to delete forums to other users</span></p>
+                      </code>
+                    </div>
+                  </div>
+
+                  
+            </section>
+
+            <section id="comments">
+                <h1>Comments</h1>
+                <p>it is so similar like the forums, if u want to create an message is very simple, just use the following endpoint:</p>
+                <br>
+                <p><span class="method post">POST</span> /api/messages/create-message</p>
+                <br>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON request Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>[</span></p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"content example"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"user_example"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"forumId"</span>: <span class="color-1">1</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span class="color-1">[]</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"parentMessageId"</span>: <span class="color-1">null</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span></p>
+                      <p><span>]</span></p>
+                    </code>
+                  </div>
+                </div>
+                
+                <p>for another side, if u want to create a reply is very simple, u dont need to pass the id forum, just the id of the parent message, just use the following endpoint:</p>
+                <br>
+                <p><span class="method post">POST</span> /api/messages/create-reply</p>
+
+                <p>the server will request a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON request Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>[</span></p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"uwu"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"angelito_374"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span class="color-1">[]</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"parentMessageId"</span>: <span class="color-1">5</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span></p>
+                      <p><span>]</span></p>
+                    </code>
+                  </div>
+                </div>
+                <br>
+                <p>if u want to get the messages like a thread is very simple, just use the following endpoint:</p>
+                <br>
+                <p><span class="method get">GET</span> /api/messages</p>
+                <br>
+                <p>the server will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON Result Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span>[</span></p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"Welcome to the first forum!"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"user123"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-01T12:00:00.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span class="color-1">[</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"Thank you!"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"user456"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-01T12:30:00.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span class="color-1">[</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"Great discussion!"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"user789"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-01T12:45:00.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span class="color-1">[]</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"parentMessageId"</span>: <span class="color-1">2</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>}</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>}</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span>}</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"parentMessageId"</span>: <span class="color-1">null</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span>,</p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"Looking forward to great discussions."</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"user456"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-02T10:30:00.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span class="color-1">[]</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"parentMessageId"</span>: <span class="color-1">null</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span>,</p>
+                      <p>&nbsp;&nbsp;<span>{</span></p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"content"</span>: <span class="color-1">"Enjoy the forum!"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"authorUsername"</span>: <span class="color-1">"user789"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"createdAt"</span>: <span class="color-1">"2024-12-03T09:15:00.000+00:00"</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"replies"</span>: <span class="color-1">[]</span>,</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"parentMessageId"</span>: <span class="color-1">null</span></p>
+                      <p>&nbsp;&nbsp;<span>}</span>,</p>
+                      <p><span>]</span></p>
+                    </code>
+                  </div>
+                </div>
+                <br>
+                <p>if u want to update a message is so easy, the system just need the id of the message and the content is the unique fill wich is allowed to update, just use the following endpoint:</p>
+                <br>
+                <p><span class="method put">PUT</span> /api/messages/upt-message/{id}</p>
+                <br>
+                <p>the server will request a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON request Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p>&nbsp;&nbsp;<span class="color-0">comment updated successfully.</span></p>
+                    </code>
+                  </div>
+                </div>
+                <br>
+                <p>if u send a bad id of the message, and you dont be the owner of the message who is currently loged on the token the system gonna return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON Result Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span class="color-0">You don't have permission to update this message: U dont have permission to update messages to other users</span></p>
+                    </code>
+                  </div>
+               </div>
+
+                  <br>
+                  <p>for delete a message is very simple, just use the following endpoint:</p>
+                  <br>
+                <p><span class="method delete">DELETE</span> /api//messages/delete-message/{id}</p>
+                <br>
+                <p>after u pass the id of the message, the server will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">JSON Result Body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span class="color-0">Message deleted successfully.</span></p>                      
+                    </code>
+                  </div>
+                </div>
+
+
+                  <p>if u pass incorrect id the system will return a json with the following structure:</p>
+
+                  <div class="code-editor">
+                    <div class="header">
+                      <span class="title">JSON Result Body</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                        <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                      </svg>
+                    </div>
+                    <div class="editor-content">
+                      <code class="code">
+                        <p><span class="color-0">You don't have permission to delete this message: U dont have permission to delete messages to other users</span></p>
+                      </code>
+                    </div>
+            </section>
+
+            <h1>Bonus</h1>
+
+
+            <section id="errors">
+                <h1>Admin functionalities</h1>
+                <br>
+                <p>the admins have the possibility to add a new role, and to remove a role from the system, the only thing that the admins can do is to add or remove a role from the system, but the system dont allow to do this, just for the admins and developers can add or remove it and </p>
+                <br>
+
+                <p>we have 2 endpoints to add or remove a role from the system, but the system dont allow to do this, just for the admins and developers can add or remove it are be the next:</p>
+                <br>
+                <p><span class="method post">POST</span> /api/users/{id}/add-role?roleName=INVITED</p>
+                <br>
+                <p><span class="method delete">DELETE</span> /api/users/{id}/remove-role?roleName=INVITED</p>
+                <br>
+                <p>the server will return a json with the following structure:</p>
+
+                <div class="code-editor">
+                  <div class="header">
+                    <span class="title">Json result body</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                      <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                  </div>
+                  <div class="editor-content">
+                    <code class="code">
+                      <p><span class="color-0">Role INVITED added successfully to the user.</span></p>
+                    </code>
+                  </div>
+                  </div>
+
+                  <p>or the case of the user wanna delete the role from the system, the server will return a json with the following structure:</p>
+
+                  <div class="code-editor">
+                    <div class="header">
+                      <span class="title">Json result body</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                        <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                      </svg>
+                    </div>
+                    <div class="editor-content">
+                      <code class="code">
+                        <p><span class="color-0">Role INVITED removed successfully from the user.</span></p>
+                      </code>
+                    </div>
+                    </div>
+                    <br>
+                    <p>we have the same functionality with the permissions, to asociate a permission to a role, just use the next endpoint:</p>
+                    <br>
+                    <p><span class="method post">POST</span> /api/roles/{id}/add-permission?permissionName=CREATE</p>
+                    <br>
+                    <p><span class="method delete">DELETE</span> /api/roles/{id}/remove-permission?permissionName=CREATE</p>
+                    <br>
+                    <p>the server will return a json with the following structure:</p>
+
+                    <div class="code-editor">
+                      <div class="header">
+                        <span class="title">Json result body</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                          <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                        </svg>
+                      </div>
+                      <div class="editor-content">
+                        <code class="code">
+                          <p><span class="color-0">Permission CREATE added successfully to the role.</span></p>
+                        </code>
+                      </div>
+                      </div>
+
+                      <p>or the case of the user wanna delete the permission from the system, the server will return a json with the following structure:</p>
+
+                      <div class="code-editor">
+                        <div class="header">
+                          <span class="title">Json result body</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                            <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                          </svg>
+                        </div>
+                        <div class="editor-content">
+                          <code class="code">
+                            <p><span class="color-0">Permission CREATE removed successfully from the role.</span></p>
+                          </code>
+                        </div>
+                        </div>
+                        <br>
+                        <p>the rol functionalities and permissions are deserved only for the admins and developers, in the case of manage or learn more about the roles, we have the following endpoint;</p>
+                        <br>
+                        <p><span class="method get">GET</span> /api/roles/with-permissions</p>
+                        <br>
+                        <p>the server will return a json with the following structure with yall permissions asociated with the roles:</p>  
+                        <br>
+                        <div class="code-editor">
+                          <div class="header">
+                            <span class="title">JSON Result Body</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon" id="copy-icon">
+                              <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M7 10h10M7 14h6M7 18h6M17 6h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+                            </svg>
+                          </div>
+                          <div class="editor-content">
+                            <code class="code">
+                              <p><span>[</span></p>
+                              <p>&nbsp;&nbsp;<span>{</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"name"</span>: <span class="color-1">"ADMIN"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"permissions"</span>: <span>[</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"READ"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"DELETE"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"CREATE"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"UPDATE"</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span>]</span></p>
+                              <p>&nbsp;&nbsp;<span>}</span>,</p>
+                              <p>&nbsp;&nbsp;<span>{</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"name"</span>: <span class="color-1">"USER"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"permissions"</span>: <span>[</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"READ"</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span>]</span></p>
+                              <p>&nbsp;&nbsp;<span>}</span>,</p>
+                              <p>&nbsp;&nbsp;<span>{</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"name"</span>: <span class="color-1">"INVITED"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"permissions"</span>: <span>[</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"READ"</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span>]</span></p>
+                              <p>&nbsp;&nbsp;<span>}</span>,</p>
+                              <p>&nbsp;&nbsp;<span>{</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"name"</span>: <span class="color-1">"DEVELOPER"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-0">"permissions"</span>: <span>[</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"READ"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"CREATE"</span>,</p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-1">"UPDATE"</span></p>
+                              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span>]</span></p>
+                              <p>&nbsp;&nbsp;<span>}</span></p>
+                              <p><span>]</span></p>
+                            </code>
+                          </div>
+                        </div>
+                        <br>
+                        <h3>the documentation is not finished yet, but the api is open to the public, so if u wanna learn more about the api, u can check the git repository for the base code.</h3>
+                        <p><img src="http://www.pngmart.com/files/7/Construction-Sign-PNG-Transparent-Image.png" width="100px" /> </p>
+                      
+          </section>
+        </main>
+    </div>
+    <footer class="footer">
+      <p>Created by Angel Gabriel Ortega</p>
+      <p>
+          <a href="mailto:angelgabrielorteg@gmail.com">angelgabrielorteg@gmail.com</a> |
+          <a href="https://github.com/angel-ISO" target="_blank">GitHub</a>
+      </p>
+  </footer>
 </body>
 </html>
