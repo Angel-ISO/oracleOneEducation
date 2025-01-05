@@ -61,7 +61,7 @@ This repository is a combination of all projects that I have done during my stud
   <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/alura">
     <img src="./media/projects/Forums.png" alt="Alura Forums" width="100%">
   </a>
-  <a href="https://oracle-one-education-kw1a8lxm0-angels-projects-69ebfab1.vercel.app/alura">
+  <a href="https://oracle-one-education-forums.vercel.app/">
     <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
   </a>
 </td>
