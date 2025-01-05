@@ -66,6 +66,16 @@ This repository is a combination of all projects that I have done during my stud
   </a>
 </td>
   </tr>
+  <tr>
+  <td width="25%" align="center">
+  <a href="https://github.com/Angel-ISO/oracleOneEducation/tree/main/literatureapp">
+    <img src="./media/projects/Literature.png" alt="Alura Forums" width="100%">
+  </a>
+  <a href="">
+     <img src="https://img.shields.io/badge/Not%20Deployed-FF0000?style=for-the-badge&logo=git&logoColor=white" alt="Not Deployed">
+  </a>
+</td>
+     </tr> 
 </table>
 
 
